@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Expense Approval Agent</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="bg-noise"></div>
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="badge">Expense Approval Agent</div>
+        <h1>Fast, policy-aware expense decisions.</h1>
+        <p>
+          Submit receipts or text notes, get a decision in seconds, and track monthly
+          spend against budgets.
+        </p>
+      </div>
+      <div class="hero-card">
+        <h2>Submit an Expense</h2>
+        <form id="expense-form">
+          <div class="row">
+            <label>Employee ID
+              <input name="employee_id" placeholder="e.g. E-102" required />
+            </label>
+            <label>Category
+              <select name="category">
+                <option value="">Select category</option>
+                <option value="meals">Meals</option>
+                <option value="lodging">Lodging</option>
+                <option value="transport">Transport</option>
+                <option value="supplies">Supplies</option>
+                <option value="software">Software</option>
+                <option value="misc">Misc</option>
+              </select>
+            </label>
+          </div>
+          <div class="row">
+            <label>Merchant
+              <input name="merchant" placeholder="Merchant name" />
+            </label>
+            <label>Date
+              <input name="date" type="date" />
+            </label>
+          </div>
+          <div class="row">
+            <label>Total
+              <input name="total" type="number" step="0.01" placeholder="0.00" />
+            </label>
+            <label>Currency
+              <input name="currency" placeholder="USD" />
+            </label>
+          </div>
+          <label>Receipt Text (optional)
+            <textarea name="receipt_text" rows="4" placeholder="Paste receipt OCR text or notes here"></textarea>
+          </label>
+          <label>Notes (optional)
+            <textarea name="notes" rows="2" placeholder="Add a short justification"></textarea>
+          </label>
+          <label>Receipt Image (optional)
+            <input name="receipt_file" type="file" accept="image/*" />
+          </label>
+          <button type="submit">Submit Expense</button>
+        </form>
+        <div id="decision" class="decision"></div>
+      </div>
+    </header>
+
+    <section class="dashboard">
+      <div class="panel">
+        <h2>Budget Overview</h2>
+        <div class="budget" id="budget"></div>
+      </div>
+      <div class="panel">
+        <h2>Status Breakdown</h2>
+        <canvas id="status-chart"></canvas>
+      </div>
+      <div class="panel">
+        <h2>Spend by Category</h2>
+        <canvas id="category-chart"></canvas>
+      </div>
+      <div class="panel wide">
+        <h2>Monthly Spend Trend</h2>
+        <canvas id="monthly-chart"></canvas>
+      </div>
+      <div class="panel wide">
+        <h2>Recent Expenses</h2>
+        <div class="table" id="expenses-table"></div>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
